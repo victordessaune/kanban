@@ -58,6 +58,7 @@
                 android:layout_marginTop="24dp"/>
 
             <EditText
+                android:id="@+id/email_input"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:hint="Digite seu e-mail"
@@ -67,6 +68,7 @@
                 android:background="@drawable/bg_edit_text"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/botao_redefinir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Enviar"
