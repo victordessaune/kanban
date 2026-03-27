@@ -11,6 +11,7 @@ import com.victor.task.R
 import com.victor.task.databinding.FragmentLoginBinding
 import com.victor.task.databinding.FragmentRegisterBinding
 import com.victor.task.util.initToolbar
+import com.victor.task.util.showBottomSheet
 
 class LoginFragment : Fragment() {
 
@@ -54,10 +55,10 @@ class LoginFragment : Fragment() {
             if (senha.isNotBlank()){
                 findNavController().navigate(R.id.action_global_homeFragment)
             } else {
-                Toast.makeText(requireContext(), "Preencha a senha!", Toast.LENGTH_SHORT).show()
+                showBottomSheet(message = R.string.password_empty)
             }
         } else {
-            Toast.makeText(requireContext(), "Preencha seu email!", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = R.string.email_empty)
         }
     }
 

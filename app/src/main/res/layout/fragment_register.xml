@@ -53,9 +53,8 @@
                 android:layout_height="48dp"
                 android:hint="Digite seu e-mail"
                 android:inputType="textEmailAddress"
-                android:padding="10dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/bg_edit_text"/>
+                style="@style/EditTextTheme"
+                android:layout_marginTop="4dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,9 +68,8 @@
                 android:layout_height="48dp"
                 android:inputType="textPassword"
                 android:hint="Digite sua senha"
-                android:padding="10dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/bg_edit_text"/>
+                style="@style/EditTextTheme"
+                android:layout_marginTop="4dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cadastro_botao"

@@ -11,6 +11,7 @@ import com.victor.task.databinding.FragmentDoneBinding
 import com.victor.task.databinding.FragmentFormTaskBinding
 import com.victor.task.databinding.FragmentRegisterBinding
 import com.victor.task.util.initToolbar
+import com.victor.task.util.showBottomSheet
 
 class FormTaskFragment : Fragment() {
 
@@ -42,7 +43,7 @@ class FormTaskFragment : Fragment() {
         if (description.isNotBlank()) {
             Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(requireContext(), "Preencha uma descrição!", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = R.string.description_empty_form_task_fragment)
         }
     }
 

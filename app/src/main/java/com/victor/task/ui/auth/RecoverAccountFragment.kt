@@ -10,6 +10,7 @@ import com.victor.task.R
 import com.victor.task.databinding.FragmentLoginBinding
 import com.victor.task.databinding.FragmentRecoverAccountBinding
 import com.victor.task.util.initToolbar
+import com.victor.task.util.showBottomSheet
 
 class RecoverAccountFragment : Fragment() {
 
@@ -43,7 +44,7 @@ class RecoverAccountFragment : Fragment() {
         if (email.isNotBlank()){
             Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(requireContext(), "Preencha um email válido!", Toast.LENGTH_SHORT).show()
+            showBottomSheet(message = R.string.email_empty)
         }
     }
 
