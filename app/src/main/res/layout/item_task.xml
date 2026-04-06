@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout1">
+    
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ConstraintLayout2"
+            android:padding="16dp" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textDescription"
+                tools:text="Criar layout da tela de login do app"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_btn"
+                android:text="Remover"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                app:backgroundTint="@color/color_delete"
+                app:layout_constraintEnd_toStartOf="@+id/buttonEditar"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="76dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_btn"
+                android:layout_marginHorizontal="8dp"
+                android:text="Editar"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                app:backgroundTint="@color/color_default"
+                app:layout_constraintEnd_toStartOf="@+id/buttonDetails"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/buttonDelete"
+                tools:layout_editor_absoluteY="76dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_btn"
+                android:text="Detalhes"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                app:backgroundTint="@color/color_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/buttonEditar"
+                tools:layout_editor_absoluteY="76dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
