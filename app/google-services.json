@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1097808874104",
+    "project_id": "kanbanmobile",
+    "storage_bucket": "kanbanmobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097808874104:android:2fd49f1c36140c48cebb8d",
+        "android_client_info": {
+          "package_name": "com.victor.task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRRiFShe_iHCn_LhsQuwiHPdUWXlp1cm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
