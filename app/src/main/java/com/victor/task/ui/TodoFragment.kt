@@ -6,14 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.victor.task.R
+import com.victor.task.data.model.Task
 import com.victor.task.databinding.FragmentHomeBinding
 import com.victor.task.databinding.FragmentTodoBinding
+import com.victor.task.ui.adapter.TaskAdapter
 
 class TodoFragment : Fragment() {
 
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var taskAdapter: TaskAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +38,16 @@ class TodoFragment : Fragment() {
         binding.floatingActionButton2.setOnClickListener {
             findNavController().navigate((R.id.action_homeFragment_to_formTaskFragment))
         }
+    }
+
+    private fun initRecyclerViewTask(taskList: List<Task>) {
+
+        taskAdapter = TaskAdapter(taskList)
+        binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewTask.setHasFixedSize(true)
+
+        binding.recyclerViewTask.adapter = taskAdapter
+
     }
 
     override fun onDestroyView() {
