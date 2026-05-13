@@ -32,6 +32,8 @@ class TodoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
+
+        initRecyclerViewTask(getTask())
     }
 
     private fun initListeners(){
@@ -49,6 +51,14 @@ class TodoFragment : Fragment() {
         binding.recyclerViewTask.adapter = taskAdapter
 
     }
+
+    private fun getTask() = listOf(
+        Task("0", "Criar nova tela do app"),
+        Task("1", "Validar informações na tela de login"),
+        Task("2", "Adicionar nova funcionalidade no app"),
+        Task("3", "Salvar token localmente"),
+        Task("4", "Criar funcionalidade de logout no app")
+    )
 
     override fun onDestroyView() {
         super.onDestroyView()
