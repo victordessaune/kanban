@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.victor.task.R
 import com.victor.task.data.model.Task
+import com.victor.task.data.model.Status
 import com.victor.task.databinding.FragmentHomeBinding
 import com.victor.task.databinding.FragmentTodoBinding
 import com.victor.task.ui.adapter.TaskAdapter
@@ -44,7 +45,7 @@ class TodoFragment : Fragment() {
 
     private fun initRecyclerViewTask(taskList: List<Task>) {
 
-        taskAdapter = TaskAdapter(taskList)
+        taskAdapter = TaskAdapter(requireContext(), taskList)
         binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewTask.setHasFixedSize(true)
 
@@ -53,11 +54,11 @@ class TodoFragment : Fragment() {
     }
 
     private fun getTask() = listOf(
-        Task("0", "Criar nova tela do app"),
-        Task("1", "Validar informações na tela de login"),
-        Task("2", "Adicionar nova funcionalidade no app"),
-        Task("3", "Salvar token localmente"),
-        Task("4", "Criar funcionalidade de logout no app")
+        Task("0", "Criar nova tela do app", Status.TODO),
+        Task("1", "Validar informações na tela de login", Status.TODO),
+        Task("2", "Adicionar nova funcionalidade no app", Status.TODO),
+        Task("3", "Salvar token localmente", Status.TODO),
+        Task("4", "Criar funcionalidade de logout no app", Status.TODO)
     )
 
     override fun onDestroyView() {
