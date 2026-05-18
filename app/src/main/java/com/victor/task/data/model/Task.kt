@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class Task (
+data class Task (
     val id: String,
     val description: String,
 
