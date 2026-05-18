@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.victor.task.R
+import com.victor.task.data.model.Status
 import com.victor.task.data.model.Task
 import com.victor.task.databinding.FragmentDoingBinding
 import com.victor.task.databinding.FragmentHomeBinding
@@ -30,27 +32,51 @@ class DoingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerViewTask(getTask())
+        initRecyclerViewTask()
+        getTask()
     }
 
 
-    private fun initRecyclerViewTask(taskList: List<Task>) {
+    private fun initRecyclerViewTask() {
 
-        taskAdapter = TaskAdapter(requireContext(), taskList)
-        binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewTask.setHasFixedSize(true)
+        taskAdapter = TaskAdapter(requireContext()) {task, option -> optionSelected(task, option)}
 
-        binding.recyclerViewTask.adapter = taskAdapter
+        with(binding.recyclerViewTask){
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
 
+            adapter = taskAdapter
+
+        }
     }
 
-    private fun getTask() = listOf(
-        Task("0", "Criar nova tela do app"),
-        Task("1", "Validar informações na tela de login"),
-        Task("2", "Adicionar nova funcionalidade no app"),
-        Task("3", "Salvar token localmente"),
-        Task("4", "Criar funcionalidade de logout no app")
-    )
+    private fun optionSelected(task: Task, option: Int){
+        when (option){
+            TaskAdapter.SELECT_REMOVER -> {
+                Toast.makeText(requireContext(), "Removendo ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_EDIT -> {
+                Toast.makeText(requireContext(), "Editando ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_DETAILS -> {
+                Toast.makeText(requireContext(), "Detalhes ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_NEXT -> {
+                Toast.makeText(requireContext(), "Próximo", Toast.LENGTH_SHORT).show()
+            }
+            TaskAdapter.SELECT_BACK -> {
+                Toast.makeText(requireContext(), "Anterior", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun getTask(){
+        val taskList = listOf(
+            Task("5", "Atualizar o Kanban", Status.DOING),
+            Task("6", "Definir identidade visual", Status.DOING)
+        )
+        taskAdapter.submitList(taskList)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
