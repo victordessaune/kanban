@@ -6,7 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 import com.victor.task.R
 import com.victor.task.data.model.Status
 import com.victor.task.data.model.Task
@@ -21,6 +30,10 @@ class DoingFragment : Fragment() {
 
     private lateinit var taskAdapter: TaskAdapter
 
+    private lateinit var reference: DatabaseReference
+
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +44,9 @@ class DoingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        reference = Firebase.database.reference
+        auth = Firebase.auth
 
         initRecyclerViewTask()
         getTask()
@@ -70,12 +86,40 @@ class DoingFragment : Fragment() {
         }
     }
 
-    private fun getTask(){
-        val taskList = listOf(
-            Task("5", "Atualizar o Kanban", Status.DOING),
-            Task("6", "Definir identidade visual", Status.DOING)
-        )
-        taskAdapter.submitList(taskList)
+    private fun getTask() {
+        reference
+            .child("task")
+            .child(auth.currentUser?.uid ?: "")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    val taskList = mutableListOf<Task>()
+
+                    for (ds in p0.children) {
+                        val task = ds.getValue(Task::class.java) as Task
+
+                        if(task.status == Status.DOING){
+                            taskList.add(task)
+                        }
+                    }
+                    binding.progressBar.isVisible = false
+                    listEmpty(taskList)
+
+                    taskList.reverse()
+                    taskAdapter.submitList(taskList)
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    Toast.makeText(requireContext(), R.string.error, Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+    private fun listEmpty(taskList: List<Task>) {
+        binding.textInfo.text = if (taskList.isEmpty()) {
+            getString(R.string.text_list_task_empty)
+        } else {
+            ""
+        }
     }
 
     override fun onDestroyView() {

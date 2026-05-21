@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
@@ -98,8 +99,15 @@ class TodoFragment : Fragment() {
 
                     for (ds in p0.children) {
                         val task = ds.getValue(Task::class.java) as Task
-                        taskList.add(task)
+
+                        if(task.status == Status.TODO){
+                            taskList.add(task)
+                        }
                     }
+                    binding.progressBar.isVisible = false
+                    listEmpty(taskList)
+
+                    taskList.reverse()
                     taskAdapter.submitList(taskList)
                 }
 
@@ -107,6 +115,14 @@ class TodoFragment : Fragment() {
                     Toast.makeText(requireContext(), R.string.error, Toast.LENGTH_SHORT).show()
                 }
             })
+    }
+
+    private fun listEmpty(taskList: List<Task>) {
+        binding.textInfo.text = if (taskList.isEmpty()) {
+            getString(R.string.text_list_task_empty)
+        } else {
+            ""
+        }
     }
 
     override fun onDestroyView() {
